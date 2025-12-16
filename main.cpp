@@ -29,12 +29,12 @@ static void reshapeCB(int w, int h){
 
 int main(int argc, char** argv){
     if (argc < 2){
-        printf("Usage: %s arena.svg\n", argv[0]);
+        printf("Usando: %s arena.svg\n", argv[0]);
         return 1;
     }
     g_game = new Game();
     if (!g_game->LoadArena(argv[1])){
-        printf("Failed to load SVG arena: %s\n", argv[1]);
+        printf("Falha para carregar arena.svg: %s\n", argv[1]);
         return 1;
     }
     g_game->InitGLWindow(argc, argv);

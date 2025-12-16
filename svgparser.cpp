@@ -12,7 +12,7 @@ static std::string trim(const std::string &s){
 }
 
 static std::string getAttr(const std::string &tag, const std::string &attr) {
-    // find attr="value"
+    // procura attr= value
     size_t p = tag.find(attr);
     if (p==std::string::npos) return "";
     size_t eq = tag.find('=', p);
@@ -37,7 +37,6 @@ bool SvgParser::ParseFile(const std::string &filepath, std::vector<SvgCircle> &o
     std::stringstream buf;
     buf << ifs.rdbuf();
     std::string content = buf.str();
-    // lowercase view for searching tags
     std::string low = content;
     std::transform(low.begin(), low.end(), low.begin(), ::tolower);
 
@@ -54,7 +53,7 @@ bool SvgParser::ParseFile(const std::string &filepath, std::vector<SvgCircle> &o
         std::string rs = getAttr(tag, "r");
         std::string fill = getAttr(tag, "fill");
         if (cxs.empty() && (low.find("cx=", start)==std::string::npos)) {
-            // maybe 'center' defined differently; skip
+            cxs = "0";
         }
         c.cx = toFloat(cxs);
         c.cy = toFloat(cys);
